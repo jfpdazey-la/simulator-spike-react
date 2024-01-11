@@ -22,12 +22,12 @@ import Link from "next/link";
 const DRAWER_WIDTH = 240;
 const LINKS = [
   { text: "Home", href: "/home", icon: HomeIcon },
-  { text: "Simulators", href: "/simulators", icon: AirlinesIcon },
-  { text: "Search", href: "/search", icon: SearchIcon },
+  { text: "Simulators", href: "/home/simulators", icon: AirlinesIcon },
+  { text: "Search", href: "/home/search", icon: SearchIcon },
 ];
 
 const SHARED_LINKS = [
-  { text: "Settings", href: "/settings", icon: SettingsIcon },
+  { text: "Settings", href: "/home/settings", icon: SettingsIcon },
   { text: "Logout", href: "/", icon: LogoutIcon },
 ];
 
