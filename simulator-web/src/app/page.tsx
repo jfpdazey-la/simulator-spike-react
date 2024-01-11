@@ -7,7 +7,7 @@ export default function Home() {
  return (
    <div className={styles.container}>
      <Typography variant="body1" display="block" gutterBottom>
-       <span>Demo Application</span>
+       Demo Application
      </Typography>
      <Button variant="contained">{label}</Button>
    </div>
