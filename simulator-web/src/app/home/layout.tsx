@@ -1,8 +1,8 @@
+import AirlinesIcon from '@mui/icons-material/Airlines';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import HomeIcon from '@mui/icons-material/Home';
-import SearchIcon from '@mui/icons-material/Search';
-import AirlinesIcon from '@mui/icons-material/Airlines';
 import LogoutIcon from '@mui/icons-material/Logout';
+import SearchIcon from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {
   AppBar,

@@ -1,6 +1,9 @@
-import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Page from '../app/page';
+
+import mockRouter from 'next-router-mock';
+import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider';
 
 describe('Root Page', () => {
   it('displays some boilerplate text', () => {
@@ -11,11 +14,14 @@ describe('Root Page', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders a button for login', () => {
-    render(<Page />);
+  it('navigates to the home page upon clicking the login button', async () => {
+    const user = userEvent.setup();
+    render(<Page />, { wrapper: MemoryRouterProvider });
 
-    const button = screen.getByRole('button', { name: 'Login' });
+    const button = screen.getByRole('link', { name: 'Login' });
 
-    expect(button).toBeInTheDocument();
+    await user.click(button);
+
+    expect(mockRouter.asPath).toBe('/home');
   });
 });
