@@ -1,4 +1,5 @@
 import { getSimulators } from '@/app/lib/services/simulators/simulatorService';
+import { Simulator } from '@/app/lib/services/simulators/simulatorTypes';
 import Select from '@/app/wrapperComponents/select';
 import {
   FormControl,
@@ -26,8 +27,8 @@ const SimulatorsPage = async (): Promise<JSX.Element> => {
             id="simulator-select"
             label="Simulator:"
           >
-            {simulatorList.map((simulator: string) => {
-              return <MenuItem value={simulator}>{simulator}</MenuItem>;
+            {simulatorList.map((simulator: Simulator) => {
+              return <MenuItem value={simulator.id}>{simulator.name}</MenuItem>;
             })}
           </Select>
         </FormControl>

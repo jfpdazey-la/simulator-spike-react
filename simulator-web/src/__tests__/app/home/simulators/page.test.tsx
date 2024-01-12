@@ -28,8 +28,18 @@ describe('Root Page', () => {
   });
 
   it('displays a list of simulators', async () => {
-    const simulators = ['Simulator 1', 'Simulator 2', 'Simulator 3'];
-    mockSimulatorService.mockResolvedValueOnce(simulators);
+    const expectedSimulators = [
+      {
+        id: 1,
+        name: 'Simulator 1',
+      },
+      {
+        id: 2,
+        name: 'Simulator 2',
+      },
+      { id: 3, name: 'Simulator 3' },
+    ];
+    mockSimulatorService.mockResolvedValueOnce(expectedSimulators);
 
     render(await SimulatorsPage());
 
