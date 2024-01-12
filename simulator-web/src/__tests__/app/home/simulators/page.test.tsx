@@ -12,6 +12,13 @@ jest.mock('../../../../app/lib/services/simulators/simulatorService', () => {
 });
 
 describe('Root Page', () => {
+  var mockSimulatorService: jest.SpyInstance;
+
+  beforeEach(() => {
+    mockSimulatorService = jest.spyOn(SimulatorService, 'getSimulators');
+    mockSimulatorService.mockResolvedValue([]);
+  });
+
   it('displays a title', async () => {
     render(await SimulatorsPage());
 
@@ -22,7 +29,6 @@ describe('Root Page', () => {
 
   it('displays a list of simulators', async () => {
     const simulators = ['Simulator 1', 'Simulator 2', 'Simulator 3'];
-    const mockSimulatorService = jest.spyOn(SimulatorService, 'getSimulators');
     mockSimulatorService.mockResolvedValue(simulators);
 
     render(await SimulatorsPage());

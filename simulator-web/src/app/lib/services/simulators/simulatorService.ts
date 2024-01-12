@@ -1,5 +1,8 @@
 const getSimulators = async (): Promise<String[]> => {
-  return Promise.resolve(['Simulator 1', 'Simulator 2', 'Simulator 3']);
+  const response = await fetch('http://localhost:3001/simulators', {
+    cache: 'no-store',
+  });
+  return response.json();
 };
 
 export { getSimulators };
