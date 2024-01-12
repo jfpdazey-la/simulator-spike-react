@@ -11,7 +11,11 @@ const SimulatorsPage = async (): Promise<JSX.Element> => {
       </Typography>
 
       {simulatorList.map((simulator) => {
-        return <span>{simulator}</span>;
+        return (
+          <Typography variant="h6" display="block">
+            {simulator}
+          </Typography>
+        );
       })}
     </>
   );
