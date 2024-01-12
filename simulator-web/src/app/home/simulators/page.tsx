@@ -1,23 +1,38 @@
 import { getSimulators } from '@/app/lib/services/simulators/simulatorService';
-import { Typography } from '@mui/material';
+import Select from '@/app/wrapperComponents/select';
+import {
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Typography,
+} from '@mui/material';
 
 const SimulatorsPage = async (): Promise<JSX.Element> => {
   const simulatorList = await getSimulators();
 
   return (
-    <>
-      <Typography variant="h5" display="block">
-        Simulators Page
-      </Typography>
-
-      {simulatorList.map((simulator) => {
-        return (
-          <Typography variant="h6" display="block">
-            {simulator}
-          </Typography>
-        );
-      })}
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography variant="h5" display="block">
+          Simulators Page
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <FormControl fullWidth>
+          <InputLabel id="simulator-select-label">Simulator:</InputLabel>
+          <Select
+            labelId="simulator-select-label"
+            id="simulator-select"
+            label="Simulator:"
+          >
+            {simulatorList.map((simulator: string) => {
+              return <MenuItem value={simulator}>{simulator}</MenuItem>;
+            })}
+          </Select>
+        </FormControl>
+      </Grid>
+    </Grid>
   );
 };
 
