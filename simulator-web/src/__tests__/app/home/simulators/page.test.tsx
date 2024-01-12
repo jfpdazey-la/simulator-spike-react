@@ -1,23 +1,34 @@
-import { render, screen } from '@testing-library/react';
+import * as SimulatorService from '@/app/lib/services/simulators/simulatorService';
+import { render, screen, waitFor } from '@testing-library/react';
 import SimulatorsPage from '../../../../app/home/simulators/page';
 
+jest.mock('../../../../app/lib/services/simulators/simulatorService', () => {
+  return {
+    __esModule: true,
+    ...jest.requireActual(
+      '../../../../app/lib/services/simulators/simulatorService',
+    ),
+  };
+});
+
 describe('Root Page', () => {
-  it('displays a title', () => {
-    render(<SimulatorsPage />);
+  it('displays a title', async () => {
+    render(await SimulatorsPage());
 
     const heading = screen.getByRole('heading', { name: 'Simulators Page' });
 
     expect(heading).toBeInTheDocument();
   });
 
-  // it('navigates to the home page upon clicking the login button', async () => {
-  //   const user = userEvent.setup();
-  //   render(<SimulatorsPage />, { wrapper: MemoryRouterProvider });
+  it('displays a list of simulators', async () => {
+    const simulators = ['Simulator 1', 'Simulator 2', 'Simulator 3'];
+    const mockSimulatorService = jest.spyOn(SimulatorService, 'getSimulators');
+    mockSimulatorService.mockResolvedValue(simulators);
 
-  //   const button = screen.getByRole('link', { name: 'Login' });
+    render(await SimulatorsPage());
 
-  //   await user.click(button);
-
-  //   expect(mockRouter.asPath).toBe('/home');
-  // });
+    await waitFor(() =>
+      expect(screen.getByText('Simulator 1')).toBeInTheDocument(),
+    );
+  });
 });
