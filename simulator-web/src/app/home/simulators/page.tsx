@@ -1,3 +1,6 @@
+// this will need to be added to drive this to client-side
+// 'use client';
+
 import { getSimulators } from '@/app/lib/services/simulators/simulatorService';
 import { Simulator } from '@/app/lib/services/simulators/simulatorTypes';
 import Select from '@/app/wrapperComponents/select';

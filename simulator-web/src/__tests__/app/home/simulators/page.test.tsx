@@ -50,8 +50,6 @@ describe('Root Page', () => {
     expect(simulatorSelect).toBeInTheDocument();
     await user.click(simulatorSelect);
 
-    screen.debug();
-
     const options = screen.getAllByRole('option');
     expect(options.length).toBe(3);
     expect(options[0]).toHaveTextContent('Simulator 1');
