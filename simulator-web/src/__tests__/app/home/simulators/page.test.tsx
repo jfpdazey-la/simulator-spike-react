@@ -1,5 +1,6 @@
 import * as SimulatorService from '@/app/lib/services/simulators/simulatorService';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import SimulatorsPage from '../../../../app/home/simulators/page';
 
 jest.mock('../../../../app/lib/services/simulators/simulatorService', () => {
@@ -28,6 +29,8 @@ describe('Root Page', () => {
   });
 
   it('displays a list of simulators', async () => {
+    const user = userEvent.setup();
+
     const expectedSimulators = [
       {
         id: 1,
@@ -45,9 +48,14 @@ describe('Root Page', () => {
 
     const simulatorSelect = screen.getByRole('combobox');
     expect(simulatorSelect).toBeInTheDocument();
+    await user.click(simulatorSelect);
 
-    // this is failing
-    // const options = screen.getAllByRole('option');
-    // expect(options[0]).toHaveTextContent('Simulator 1');
+    screen.debug();
+
+    const options = screen.getAllByRole('option');
+    expect(options.length).toBe(3);
+    expect(options[0]).toHaveTextContent('Simulator 1');
+    expect(options[1]).toHaveTextContent('Simulator 2');
+    expect(options[2]).toHaveTextContent('Simulator 3');
   });
 });
