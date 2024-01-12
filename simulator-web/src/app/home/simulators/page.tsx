@@ -6,7 +6,7 @@ const SimulatorsPage = async (): Promise<JSX.Element> => {
 
   return (
     <>
-      <Typography variant="h3" display="block">
+      <Typography variant="h5" display="block">
         Simulators Page
       </Typography>
 
