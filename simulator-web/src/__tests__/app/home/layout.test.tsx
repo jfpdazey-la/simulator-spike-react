@@ -9,11 +9,9 @@ describe('Home Layout', () => {
   it('displays a toolbar', () => {
     render(<HomeLayout children={exampleNode} />);
 
-    screen.debug();
+    const heading = screen.getByRole('heading', { name: 'Spike Application' });
 
-    const heading = screen.getByRole('heading');
-
-    expect(heading).toHaveTextContent('Spike Application');
+    expect(heading).toBeInTheDocument();
   });
 
   it('displays the provided child page by default', async () => {

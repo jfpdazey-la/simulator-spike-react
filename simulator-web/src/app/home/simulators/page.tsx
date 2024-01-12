@@ -1,9 +1,11 @@
 import { Typography } from '@mui/material';
 
-export default function Page() {
+const SimulatorsPage = (): JSX.Element => {
   return (
-    <Typography variant="body1" display="block">
+    <Typography variant="h3" display="block">
       Simulators Page
     </Typography>
   );
-}
+};
+
+export default SimulatorsPage;
