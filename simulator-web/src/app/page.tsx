@@ -4,7 +4,7 @@ import styles from './page.module.css';
 
 const label = 'Login';
 
-export default function Home() {
+const RootPage = () => {
   return (
     <div className={styles.container}>
       <Typography variant="body1" display="block" gutterBottom>
@@ -15,4 +15,6 @@ export default function Home() {
       </Button>
     </div>
   );
-}
+};
+
+export default RootPage;

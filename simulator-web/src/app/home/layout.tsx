@@ -31,7 +31,7 @@ const SHARED_LINKS = [
   { text: 'Logout', href: '/', icon: LogoutIcon },
 ];
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <AppBar position="fixed" sx={{ zIndex: 2000 }}>
@@ -100,4 +100,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </Box>
     </div>
   );
-}
+};
+
+export default HomeLayout;

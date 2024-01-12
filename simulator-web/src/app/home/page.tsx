@@ -1,9 +1,11 @@
 import { Typography } from '@mui/material';
 
-export default function Page() {
+const HomePage = () => {
   return (
     <Typography variant="body1" display="block">
       Home Page
     </Typography>
   );
-}
+};
+
+export default HomePage;
