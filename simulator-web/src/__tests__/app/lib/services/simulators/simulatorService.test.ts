@@ -1,3 +1,4 @@
+import { fetcher } from '@/app/lib/services/fetcher';
 import { getSimulators } from '@/app/lib/services/simulators/simulatorService';
 import * as SWR from 'swr';
 
@@ -34,6 +35,19 @@ describe('Simulator Service', () => {
     const simulators = getSimulators();
 
     expect(simulators).toEqual(expectedSimulators);
+    expect(mockSWR).toHaveBeenCalledWith(
+      'http://localhost:3001/simulators',
+      fetcher,
+      expect.anything(),
+    );
+  });
+
+  it('disables SWR revalidateOnFocus', async () => {
+    getSimulators();
+
+    expect(mockSWR).toHaveBeenCalledWith(expect.anything(), expect.anything(), {
+      revalidateOnFocus: false,
+    });
   });
 
   it('returns an empty list of simulators while SWR is loading', async () => {
