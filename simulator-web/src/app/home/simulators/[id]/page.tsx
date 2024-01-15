@@ -1,5 +1,6 @@
 'use client';
 
+import { getSimulatorDetails } from '@/app/lib/services/simulators/simulatorService';
 import {
   Box,
   Button,
@@ -13,9 +14,11 @@ import { useRouter } from 'next/navigation';
 const SimulatorDetailsPage = ({
   params,
 }: {
-  params: { id: number };
+  params: { simulatorId: number };
 }): JSX.Element => {
   const { back } = useRouter();
+
+  const simulatorDetails = getSimulatorDetails(params.simulatorId);
 
   const handleBack = (event: any) => {
     event.preventDefault();
@@ -30,21 +33,31 @@ const SimulatorDetailsPage = ({
             Simulator Details
           </Typography>
           <Typography variant="h5" component="div">
-            Simulator {params.id}
+            {simulatorDetails?.manufacturer} {simulatorDetails?.name}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            manufacturer?
+            Line: {simulatorDetails?.line}
           </Typography>
-          <Typography variant="body2">
-            more details here
-            <br />
-            and more here
+          <Typography variant="body2" component="div">
+            Passengers: {simulatorDetails?.passengers}
+          </Typography>
+          <Typography variant="body2" component="div">
+            Active: {simulatorDetails?.active ? 'Yes' : 'No'}
           </Typography>
         </CardContent>
         <CardActions>
           <Button size="small" onClick={handleBack}>
             Back to Simulator List
           </Button>
+          {simulatorDetails && (
+            <Button
+              size="small"
+              href={simulatorDetails.website}
+              target="_blank"
+            >
+              Visit Website
+            </Button>
+          )}
         </CardActions>
       </Card>
     </Box>
