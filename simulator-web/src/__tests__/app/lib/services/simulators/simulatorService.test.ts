@@ -29,10 +29,24 @@ describe('Simulator Service', () => {
     mockSWR.mockReturnValue({ data: [] });
   });
 
-  it('returns a list of simulators', async () => {
+  it('returns a list of simulators from SWR fetch', async () => {
     mockSWR.mockReturnValueOnce({ data: expectedSimulators });
     const simulators = getSimulators();
 
     expect(simulators).toEqual(expectedSimulators);
+  });
+
+  it('returns an empty list of simulators while SWR is loading', async () => {
+    mockSWR.mockReturnValueOnce({ data: null, isLoading: true });
+    const simulators = getSimulators();
+
+    expect(simulators).toEqual([]);
+  });
+
+  it('returns an empty list of simulators when SWR returns an error', async () => {
+    mockSWR.mockReturnValueOnce({ data: null, error: new Error() });
+    const simulators = getSimulators();
+
+    expect(simulators).toEqual([]);
   });
 });
