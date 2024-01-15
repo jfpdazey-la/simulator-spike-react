@@ -1,7 +1,13 @@
 'use client';
 
-import { Grid, Typography } from '@mui/material';
-import Link from 'next/link';
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Typography,
+} from '@mui/material';
 import { useRouter } from 'next/navigation';
 
 const SimulatorDetailsPage = ({
@@ -15,21 +21,33 @@ const SimulatorDetailsPage = ({
     event.preventDefault();
     back();
   };
+
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Typography variant="body2" display="block">
-          <Link href="/" onClick={handleBack}>
-            &lt; Back
-          </Link>
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="h6" display="block">
-          Simulator Details Page for Simulator id: {params.id}
-        </Typography>
-      </Grid>
-    </Grid>
+    <Box sx={{ minWidth: 275 }}>
+      <Card variant="outlined">
+        <CardContent>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            Simulator Details
+          </Typography>
+          <Typography variant="h5" component="div">
+            Simulator {params.id}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            manufacturer?
+          </Typography>
+          <Typography variant="body2">
+            more details here
+            <br />
+            and more here
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small" onClick={handleBack}>
+            Back to Simulator List
+          </Button>
+        </CardActions>
+      </Card>
+    </Box>
   );
 };
 

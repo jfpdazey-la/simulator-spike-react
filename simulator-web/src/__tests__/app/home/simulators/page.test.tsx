@@ -22,9 +22,6 @@ jest.mock('next/navigation', () => {
     useRouter: jest.fn(() => ({
       push: routerPush,
     })),
-    useSearchParams: jest.fn(() => ({
-      get: jest.fn(),
-    })),
     usePathname: jest.fn(),
   };
 });
@@ -41,7 +38,7 @@ const expectedSimulators = [
   { id: 3, name: 'Simulator 3' },
 ];
 
-describe('Root Page', () => {
+describe('Simulators Page', () => {
   var mockSimulatorService: jest.SpyInstance;
 
   beforeEach(() => {

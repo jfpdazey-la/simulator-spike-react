@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { fetcher } from '../fetcher';
-import { Simulator } from './ISimulatorTypes';
+import { Simulator, SimulatorDetails } from './ISimulatorTypes';
 
 const getSimulators = (): Simulator[] => {
   const {
@@ -16,4 +16,8 @@ const getSimulators = (): Simulator[] => {
   return simulators;
 };
 
-export { getSimulators };
+const getSimulatorDetails = (id: number): SimulatorDetails | null => {
+  return null;
+};
+
+export { getSimulatorDetails, getSimulators };

@@ -3,4 +3,6 @@ interface Simulator {
   name: string;
 }
 
-export type { Simulator };
+interface SimulatorDetails extends Simulator {}
+
+export type { Simulator, SimulatorDetails };
