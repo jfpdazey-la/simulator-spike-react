@@ -11,14 +11,25 @@ import {
   MenuItem,
   Typography,
 } from '@mui/material';
+import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const SimulatorsPage = (): JSX.Element => {
-  const simulatorList = getSimulators();
   const label = 'Submit';
+
+  const { push } = useRouter();
+  const pathname = usePathname();
+
+  const [simulatorId, setSimulatorId] = useState<string>('');
+  const simulatorList = getSimulators();
+
+  const handleSimulatorChange = (event: any) => {
+    setSimulatorId(event.target.value);
+  };
 
   const handleSimulatorSubmit = (event: any) => {
     event.preventDefault();
-    alert('Simulator selected');
+    push(`${pathname}/${simulatorId}`);
   };
 
   return (
@@ -36,11 +47,15 @@ const SimulatorsPage = (): JSX.Element => {
               labelId="simulator-select-label"
               id="simulator-select"
               label="Simulator:"
-              defaultValue={''}
+              defaultValue=""
+              value={simulatorId}
+              onChange={handleSimulatorChange}
             >
               {simulatorList.map((simulator: Simulator) => {
                 return (
-                  <MenuItem value={simulator.id}>{simulator.name}</MenuItem>
+                  <MenuItem key={simulator.id} value={simulator.id}>
+                    {simulator.name}
+                  </MenuItem>
                 );
               })}
             </Select>
@@ -48,7 +63,9 @@ const SimulatorsPage = (): JSX.Element => {
         </Grid>
         <Grid item xs={8}></Grid>
         <Grid item xs={4} textAlign={'end'}>
-          <Button variant="contained">{label}</Button>
+          <Button variant="contained" type="submit">
+            {label}
+          </Button>
         </Grid>
       </Grid>
     </form>
