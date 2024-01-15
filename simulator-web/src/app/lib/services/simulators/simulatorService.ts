@@ -1,10 +1,19 @@
-import { Simulator } from "./simulatorTypes";
+import useSWR from 'swr';
+import { fetcher } from '../fetcher';
+import { Simulator } from './simulatorTypes';
 
-const getSimulators = async (): Promise<Simulator[]> => {
-  const response = await fetch('http://localhost:3001/simulators', {
-    cache: 'no-store',
+const getSimulators = (): Simulator[] => {
+  const {
+    data: simulators,
+    error,
+    isLoading,
+  } = useSWR('http://localhost:3001/simulators', fetcher, {
+    revalidateOnFocus: false,
   });
-  return response.json();
+  
+  if (isLoading || error) return [];
+
+  return simulators;
 };
 
 export { getSimulators };

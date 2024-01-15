@@ -1,7 +1,17 @@
 import { getSimulators } from '@/app/lib/services/simulators/simulatorService';
+import * as SWR from 'swr';
+
+jest.mock('swr', () => {
+  return {
+    __esModule: true,
+    ...jest.requireActual('swr'),
+  };
+});
 
 describe('Simulator Service', () => {
-  const globalFetch = global.fetch;
+  const defaultSWRExportHandle = 'default';
+  var mockSWR: jest.SpyInstance;
+
   const expectedSimulators = [
     {
       id: 1,
@@ -15,19 +25,13 @@ describe('Simulator Service', () => {
   ];
 
   beforeEach(() => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(expectedSimulators),
-      }),
-    ) as jest.Mock;
-  });
-
-  afterEach(() => {
-    global.fetch = globalFetch;
+    mockSWR = jest.spyOn(SWR, defaultSWRExportHandle);
+    mockSWR.mockReturnValue({ data: [] });
   });
 
   it('returns a list of simulators', async () => {
-    const simulators = await getSimulators();
+    mockSWR.mockReturnValueOnce({ data: expectedSimulators });
+    const simulators = getSimulators();
 
     expect(simulators).toEqual(expectedSimulators);
   });

@@ -17,11 +17,11 @@ describe('Root Page', () => {
 
   beforeEach(() => {
     mockSimulatorService = jest.spyOn(SimulatorService, 'getSimulators');
-    mockSimulatorService.mockResolvedValue([]);
+    mockSimulatorService.mockReturnValue([]);
   });
 
   it('displays a title', async () => {
-    render(await SimulatorsPage());
+    render(<SimulatorsPage />);
 
     const heading = screen.getByRole('heading', { name: 'Simulators Page' });
 
@@ -42,9 +42,9 @@ describe('Root Page', () => {
       },
       { id: 3, name: 'Simulator 3' },
     ];
-    mockSimulatorService.mockResolvedValueOnce(expectedSimulators);
+    mockSimulatorService.mockReturnValueOnce(expectedSimulators);
 
-    render(await SimulatorsPage());
+    render(<SimulatorsPage />);
 
     const simulatorSelect = screen.getByRole('combobox');
     expect(simulatorSelect).toBeInTheDocument();
@@ -55,5 +55,34 @@ describe('Root Page', () => {
     expect(options[0]).toHaveTextContent('Simulator 1');
     expect(options[1]).toHaveTextContent('Simulator 2');
     expect(options[2]).toHaveTextContent('Simulator 3');
+  });
+
+  it('allows user to select a simulator', async () => {
+    const user = userEvent.setup();
+
+    const expectedSimulators = [
+      {
+        id: 1,
+        name: 'Simulator 1',
+      },
+      {
+        id: 2,
+        name: 'Simulator 2',
+      },
+      { id: 3, name: 'Simulator 3' },
+    ];
+    mockSimulatorService.mockReturnValueOnce(expectedSimulators);
+
+    render(<SimulatorsPage />);
+
+    const simulatorSelect = screen.getByRole('combobox');
+    expect(simulatorSelect).toBeInTheDocument();
+    await user.click(simulatorSelect);
+
+    const options = screen.getAllByRole('option');
+    await user.click(options[0]);
+
+    const submitButton = screen.getByRole('button');
+    await user.click(submitButton);
   });
 });
