@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { fetcher } from '../fetcher';
-import { Simulator } from './simulatorTypes';
+import { Simulator } from './ISimulatorTypes';
 
 const getSimulators = (): Simulator[] => {
   const {
@@ -10,7 +10,7 @@ const getSimulators = (): Simulator[] => {
   } = useSWR('http://localhost:3001/simulators', fetcher, {
     revalidateOnFocus: false,
   });
-  
+
   if (isLoading || error) return [];
 
   return simulators;

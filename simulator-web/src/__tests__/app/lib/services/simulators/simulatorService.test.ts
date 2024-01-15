@@ -1,4 +1,5 @@
 import { fetcher } from '@/app/lib/services/fetcher';
+import { Simulator } from '@/app/lib/services/simulators/ISimulatorTypes';
 import { getSimulators } from '@/app/lib/services/simulators/simulatorService';
 import * as SWR from 'swr';
 
@@ -13,7 +14,7 @@ describe('Simulator Service', () => {
   const defaultSWRExportHandle = 'default';
   var mockSWR: jest.SpyInstance;
 
-  const expectedSimulators = [
+  const expectedSimulators: Simulator[] = [
     {
       id: 1,
       name: 'Simulator 1',
