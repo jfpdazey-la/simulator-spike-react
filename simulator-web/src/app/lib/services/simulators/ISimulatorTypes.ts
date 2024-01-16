@@ -4,7 +4,7 @@ interface Simulator {
 }
 
 interface SimulatorDetails extends Simulator {
-  line: string;
+  family: string;
   manufacturer: string;
   website: string;
   passengers: number;

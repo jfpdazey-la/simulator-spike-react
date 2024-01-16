@@ -36,7 +36,7 @@ const SimulatorDetailsPage = ({
             {simulatorDetails?.manufacturer} {simulatorDetails?.name}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Line: {simulatorDetails?.line}
+            Family: {simulatorDetails?.family}
           </Typography>
           <Typography variant="body2" component="div">
             Passengers: {simulatorDetails?.passengers}

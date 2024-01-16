@@ -7,7 +7,7 @@ import SimulatorDetailsPage from '../../../../../app/home/simulators/[id]/page';
 const expectedSimulatorDetails = {
   id: 42,
   name: '737-900',
-  line: '737',
+  family: '737',
   manufacturer: 'Boeing',
   website: 'https://example.com',
   passengers: 215,
@@ -67,7 +67,7 @@ describe('Simulator Details Page', () => {
     render(<SimulatorDetailsPage params={{ simulatorId: 42 }} />);
 
     expect(screen.getByText('Boeing 737-900')).toBeInTheDocument();
-    expect(screen.getByText('Line: 737')).toBeInTheDocument();
+    expect(screen.getByText('Family: 737')).toBeInTheDocument();
     expect(screen.getByText('Passengers: 215')).toBeInTheDocument();
     expect(screen.getByText('Active: Yes')).toBeInTheDocument();
   });
