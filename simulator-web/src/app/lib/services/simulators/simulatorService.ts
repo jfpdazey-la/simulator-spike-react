@@ -17,7 +17,17 @@ const getSimulators = (): Simulator[] => {
 };
 
 const getSimulatorDetails = (id: number): SimulatorDetails | null => {
-  return null;
+  const {
+    data: simulator,
+    error,
+    isLoading,
+  } = useSWR(`http://localhost:3001/simulators/${id}`, fetcher, {
+    revalidateOnFocus: false,
+  });
+
+  if (isLoading || error) return null;
+
+  return simulator;
 };
 
 export { getSimulatorDetails, getSimulators };
