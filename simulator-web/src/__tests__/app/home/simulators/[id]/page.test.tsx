@@ -44,14 +44,14 @@ describe('Simulator Details Page', () => {
   });
 
   it('displays a title', async () => {
-    render(<SimulatorDetailsPage params={{ simulatorId: 42 }} />);
+    render(<SimulatorDetailsPage params={{ id: 42 }} />);
 
     expect(screen.getByText('Simulator Details')).toBeInTheDocument();
   });
 
   it('allows the user to return to Simulators', async () => {
     const user = userEvent.setup();
-    render(<SimulatorDetailsPage params={{ simulatorId: 42 }} />);
+    render(<SimulatorDetailsPage params={{ id: 42 }} />);
 
     const backButton = screen.getByRole('button', {
       name: 'Back to Simulator List',
@@ -64,7 +64,7 @@ describe('Simulator Details Page', () => {
   it('displays simulator details', async () => {
     mockSimulatorService.mockReturnValue(expectedSimulatorDetails);
 
-    render(<SimulatorDetailsPage params={{ simulatorId: 42 }} />);
+    render(<SimulatorDetailsPage params={{ id: 42 }} />);
 
     expect(screen.getByText('Boeing 737-900')).toBeInTheDocument();
     expect(screen.getByText('Family: 737')).toBeInTheDocument();
@@ -78,7 +78,7 @@ describe('Simulator Details Page', () => {
       active: false,
     } as SimulatorDetails);
 
-    render(<SimulatorDetailsPage params={{ simulatorId: 42 }} />);
+    render(<SimulatorDetailsPage params={{ id: 42 }} />);
 
     expect(screen.getByText('Active: No')).toBeInTheDocument();
   });

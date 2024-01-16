@@ -14,11 +14,11 @@ import { useRouter } from 'next/navigation';
 const SimulatorDetailsPage = ({
   params,
 }: {
-  params: { simulatorId: number };
+  params: { id: number };
 }): JSX.Element => {
   const { back } = useRouter();
 
-  const simulatorDetails = getSimulatorDetails(params.simulatorId);
+  const simulatorDetails = getSimulatorDetails(params.id);
 
   const handleBack = (event: any) => {
     event.preventDefault();
